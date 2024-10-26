@@ -1,23 +1,23 @@
 let invitationsCount = 0;
 let isConnecting = false;
+let toggleButton = document.getElementById('toggle_connecting');
 
-document.getElementById('toggle_connecting').addEventListener('click', () => {
+toggleButton.addEventListener('click', () => {
     isConnecting = !isConnecting;
-
+    let action = "startConnecting";
+    document.getElementById('counter').innerText = invitationsCount;
     if(isConnecting) {
-        // invitationsCount = 0;
-        document.getElementById('counter').innerText = invitationsCount;
-        document.getElementById('toggle_connecting').textContent = "Stop Connecting";
-        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-            chrome.tabs.sendMessage(tabs[0].id, { action: "startConnecting" });
-        });
+        toggleButton.textContent = "Stop Connecting";
+        toggleButton.classList.add("stop");
     } else {
-        document.getElementById('counter').innerText = invitationsCount;
-        document.getElementById('toggle_connecting').textContent = "Start Connecting";
-        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-            chrome.tabs.sendMessage(tabs[0].id, { action: "stopConnecting" });
-        });
+        toggleButton.textContent = "Start Connecting";
+        toggleButton.classList.remove("stop");
+        action = "stopConnecting";
     }
+
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, { action: action });
+    });
     
 });
 
@@ -29,17 +29,5 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 
-let isClicking = false;
-
-document.getElementById('toggleButton').addEventListener('click', () => {
-    isClicking = !isClicking;
-
-    const buttonText = isClicking ? 'Stop Clicking' : 'Start Clicking';
-    document.getElementById('toggleButton').textContent = buttonText;
-
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        chrome.tabs.sendMessage(tabs[0].id, { action: isClicking ? 'start' : 'stop' });
-    });
-});
 
 

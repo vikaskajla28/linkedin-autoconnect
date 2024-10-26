@@ -4,7 +4,8 @@
   "version": "1.0",
   "permissions": ["activeTab"],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": "linkedin.png"
   },
   "background": {
     "service_worker": "background.js"

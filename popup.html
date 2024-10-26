@@ -3,10 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Linkedin Autoconnect</title>
+    <style>
+        #invitations_text {
+            font-size: 18px;
+            color: white;
+            margin: auto;
+        }
+
+        #counter {
+            font-size: 80px;
+            font-weight: 900;
+            padding: 10px;
+            margin: auto;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            width: 200px;
+            background-color: #0a0a0f;
+            padding: 10px;
+        }
+
+        #toggle_connecting {
+            padding: 10px;
+            margin: auto;
+            font-size: 20px;
+            width: 180px;
+            color: white;
+            border: none;
+        }
+
+        .start {
+            background-color: #4caf50;
+        }
+
+        .stop {
+            background-color: #f44336;
+        }
+    </style>
 </head>
 <body>
-    <button id="toggle_connecting">Start Connecting</button>
-    <p>Invitations Sent: <span id="counter">0</span></p>
+    <div><p id="invitations_text">Invitations Sent</p></div>
+    <div><p id="counter">0</p></div>
+    <button id="toggle_connecting" class="start">Start Connecting</button> 
     <script src="popup.js"></script>
 </body>
 </html>
