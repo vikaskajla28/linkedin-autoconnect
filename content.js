@@ -3,13 +3,19 @@ let clicking = false;
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "startConnecting") {
         clicking = true;
-        clickButtons();
+        sendInvitations();
     }
 });
 
-async function clickButtons() {
-    const buttons = document.querySelectorAll('.testing');
-    for (const button of buttons) {
+async function sendInvitations() {
+    const buttons = document.querySelectorAll('button.artdeco-button');
+	// Filter only connect buttons
+	const connectButtons = Array.from(buttons).filter(button => {
+		const span = button.querySelector('span.artdeco-button__text');
+		return span && span.textContent.trim() === 'Connect';
+	});
+    // send invitations by clicking each connect button
+    for (const button of connectButtons) {
         if (!clicking) break;
         button.click();
         chrome.runtime.sendMessage({ action: "updateCounter" });
@@ -19,4 +25,6 @@ async function clickButtons() {
         await new Promise(resolve => setTimeout(resolve, waitTime));
     }
 }
+
+
 
