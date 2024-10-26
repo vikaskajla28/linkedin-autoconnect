@@ -13,7 +13,10 @@ async function clickButtons() {
         if (!clicking) break;
         button.click();
         chrome.runtime.sendMessage({ action: "updateCounter" });
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        // random wait time between 5 and 10 seconds
+        const waitTime = (Math.floor(Math.random() * 5) + 5)*1000;
+        console.log("waitTime: ", waitTime);
+        await new Promise(resolve => setTimeout(resolve, waitTime));
     }
 }
 
