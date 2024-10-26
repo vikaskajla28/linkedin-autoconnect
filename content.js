@@ -17,11 +17,11 @@ async function sendInvitations() {
     // send invitations by clicking each connect button
     for (const button of connectButtons) {
         if (!clicking) break;
+        button.scrollIntoView({ behavior: 'smooth', block: 'center' });
         button.click();
         chrome.runtime.sendMessage({ action: "updateCounter" });
         // random wait time between 5 and 10 seconds
         const waitTime = (Math.floor(Math.random() * 5) + 5)*1000;
-        console.log("waitTime: ", waitTime);
         await new Promise(resolve => setTimeout(resolve, waitTime));
     }
 }
