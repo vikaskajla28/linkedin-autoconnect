@@ -4,7 +4,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "startConnecting") {
         clicking = true;
         sendInvitations();
-    }
+    } else clicking = false;
 });
 
 async function sendInvitations() {
@@ -25,6 +25,8 @@ async function sendInvitations() {
         await new Promise(resolve => setTimeout(resolve, waitTime));
     }
 }
+
+
 
 
 
